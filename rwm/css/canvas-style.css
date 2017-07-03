@@ -62,8 +62,8 @@ canvas{
     display: none;
 }
 
-#custom-text{
-    top: 385px;
+#custom-text1{
+    top: 270px;
     left: 490px;
     font-family: theme;
     font-size: 60pt;
@@ -73,6 +73,18 @@ canvas{
     border: none;
     text-transform: uppercase;
 }
+#custom-text2{
+    top: 350px;
+    left: 490px;
+    font-family: theme;
+    font-size: 60pt;
+    text-align: center;
+    color: rgba(0,0,0,0);
+    background: none;
+    border: none;
+    text-transform: uppercase;
+}
+
 *:focus {
     outline: none;
 }
