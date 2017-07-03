@@ -1,0 +1,142 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="css/canvas-style.css">
+    </head>
+    <body style='background:black'>
+        <canvas id="memegenerator"></canvas>
+        <input id="custom-text" class='items' type="text" value="" placeholder='enter text'/>
+        <a class='items' id="img-download" download="mobiforge-canvas.png">Download image</a>
+        <input id="fileInput" type="file" class='items' />
+        <div class="button upload" id="uploadButton" onclick="openFile()">
+            <img src="images/icon-camera.png">Add Photo
+        </div>
+        <div class="hidden_elem">
+
+            <span  style="font-family: 'theme', cursive;">&nbsp;</span>
+            <img src="images/logo-frame-2x.png" style='opacity:0; height:250px; width:250px'id="overlay-image">
+            <img style="display: none" src="" id="start-image">
+        </div>
+
+        <script>
+            // <![CDATA[
+            var canvas;
+            var canvasWidth;
+            var canvasHeight;
+            var ctx;
+            var x;
+            var y;
+            var download;
+            var data;
+            var fileInput;
+            var img;
+
+            var ontopImg = document.getElementById('overlay-image');
+
+            window.onload = function() {
+                prepareExample();
+            }
+            /*$( "#custom-text" ).keypress(function() {
+                doTransform();
+                alert('keypress');
+            });*/
+            
+            function openFile(){
+                $('#fileInput').click();
+            }
+
+            $("#custom-text").keyup(function() {
+                var dInput = $(this).val();
+                doTransform();
+                //$(".dDimension:contains('" + dInput + "')").css("display","block");
+            });
+
+
+            function prepareExample() {
+                img = document.getElementById('start-image');
+
+                var deviceWidth = window.innerWidth;;
+                canvasWidth = Math.min(1000, deviceWidth-20);
+                canvasHeight = Math.min(600, deviceWidth-20);
+                canvas = document.getElementById('memegenerator');
+
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
+                ctx = canvas.getContext('2d');
+
+                x = canvas.width/2 - img.width/2;
+                y = canvas.height/2 - img.height/2;
+
+                ctx.drawImage(img, x, y);
+
+                ctx.textAlign = 'center';
+                ctx.lineWidth  = 4;
+                ctx.font = '20pt impact';
+                ctx.strokeStyle = 'black';
+                ctx.fillStyle = 'white';
+                ctx.lineJoin = 'round';
+                doTransform();
+
+
+                fileInput = document.getElementById('fileInput');
+
+                fileInput.addEventListener('change', function(e) {
+
+                    var reader = new FileReader();
+                    reader.onload = function(event){
+
+                        img.onload = function(){
+                            /*ctx.clearRect(0, 0, canvas.width, canvas.height);
+                            x = canvas.width/2 - img.width/2;
+                            y = canvas.height/2 - img.height/2;
+                            ctx.drawImage(img,x,y);
+
+                            ctx.drawImage(ontopImg,360,200,ontopImg.width,ontopImg.height);*/
+                            doTransform();
+                            //imgTransform();
+                        }
+                        img.src = reader.result;
+                    }
+                    reader.readAsDataURL(fileInput.files[0]);     
+
+
+
+
+                }, false);
+
+                var controls = document.getElementById('controls');
+
+                download = document.getElementById('img-download');
+                download.addEventListener('click', prepareDownload, false);
+
+                ctx.textAlign = 'center';
+                ctx.font = '90px theme';
+                ctx.strokeStyle = 'red';
+                ctx.fillStyle = 'red';
+                ctx.drawImage(ontopImg,360,200,ontopImg.width,ontopImg.height);
+
+            }
+
+            function doTransform() {
+
+                text = document.getElementById('custom-text').value;
+                text = text.toUpperCase();/*
+                wrapText(ctx, text, 570, 600, canvasWidth-canvasWidth/3, 100);*/
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                x = canvas.width/2 - img.width/2;
+                y = canvas.height/2 - img.height/2;
+                ctx.drawImage(img,x,y);
+
+                ctx.drawImage(ontopImg,360,200,ontopImg.width,ontopImg.height);
+                ctx.fillText(text,480,445);
+            }
+            function prepareDownload() {
+                var data = canvas.toDataURL();
+                download.href = data;
+            }
+
+
+
+        </script>
+    </body>
+</html> 

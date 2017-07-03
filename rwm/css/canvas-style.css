@@ -1,0 +1,78 @@
+@font-face {
+    font-family: theme;
+    src: url('knockout.woff');
+}
+body{
+}
+.hidden_elem{
+    position: fixed;
+}
+canvas{
+    border-style: solid;
+    border-color: white;
+    position: fixed;
+    left: 13%;
+}
+.button.upload{
+    cursor: pointer;
+    display: inline-block;
+    background: url(../images/bg-back.png) 100% 100%;
+    background-size: cover;
+    color: #fff;
+    font-size: 22px;
+    letter-spacing: .07em;
+    padding: 10px 20px;
+    width: 310px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 16px;
+    position: absolute;
+    top: 500px;
+    left: 485px;
+}
+.button.upload img{
+    height: 20px;
+    padding-right: 10px;
+    top: 2px;
+}
+
+
+#img-download{
+    background: white;
+}
+
+.items{
+    position: absolute;
+}
+
+#img-download{
+    top: 550;
+    left: 600px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    text-transform: lowercase;
+    color: black;
+}
+
+
+#fileinput{
+    display: none;
+}
+
+#custom-text{
+    top: 385px;
+    left: 490px;
+    font-family: theme;
+    font-size: 60pt;
+    text-align: center;
+    color: rgba(0,0,0,0);
+    background: none;
+    border: none;
+    text-transform: uppercase;
+}
+*:focus {
+    outline: none;
+}
