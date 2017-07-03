@@ -1,0 +1,335 @@
+<html>
+    <head>
+        <title>Riseabove</title>
+        <!--<meta property="og:url"           content="http://meme-nto.comeze.com" />
+<meta property="og:type"          content="website" />
+<meta property="og:title"         content="meme-nto" />
+<meta property="og:description"   content="meme generator" />
+<meta property="og:image"         content="http://meme-nto.comeze.com/resources/images/Quinlingpandabearr.jpg" />-->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="canvas-outer">
+                <img style="display: none;" src="images/logo-frame-2x.png" id="start-image">
+                <canvas id="memegenerator"></canvas>
+                <div class="control-wrapper">
+                    <div class="enter-text-wrapper">
+                        <input id="custom-text" type="text" value="" placeholder='enter text'/><br /><br />
+                        <input id="custom-text2" type="text" value="" placeholder='enter text'/><br /><br />
+                        <button onclick="doTransform()">add text</button>
+                    </div>
+                    <div>
+                        scale: <input id="scale" max="4" min="0.1" step="0.01" type="range" value="1" />
+                        <input type="number" id='scale_input' onchange='doScale()'/>
+                    </div>
+                    <div>
+                        rotate: <input id="rotate" max="180" min="-180" step="1" type="range" value="0" />
+                        <input type="number" id='rotate_input' onchange='doRotate()'/>
+                    </div>
+                    <div>
+                        <input id="fileInput" type="file" style="display: none;" />
+                        <div class="button upload" id="uploadButton"><img src="images/icon-camera.png">Add Photo</div>
+                    </div>
+                    <div>
+                        <a id="img-download" download="mobiforge-canvas.png">Download image</a>
+                    </div>
+                </div>
+            </div>
+            <!--table>
+                <tr>
+                    <td>
+                        <canvas  id="memegenerator"></canvas>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        scale: <input id="scale" max="4" min="0.1" step="0.01" type="range" value="1" />
+                        <input type="number" id='scale_input' onchange='doScale()'/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        rotate: <input id="rotate" max="180" min="-180" step="1" type="range" value="0" />
+                        <input type="number" id='rotate_input' onchange='doRotate()'/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="fileInput" type="file" style="display: none;" />
+                        <div class="button upload" id="uploadButton"><img src="images/icon-camera.png">Add Photo</div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <input id="custom-text" type="text" value="" placeholder='enter text'/>
+                        <button onclick="doTransform()">add text</button>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <a id="img-download" download="mobiforge-canvas.png">Download image</a>
+                    </td>
+
+                </tr>
+            </table-->
+                <!-- <tr>
+    <a class="twitter-share-button"
+    onclick="shareTwitter()">
+    Tweet</a>
+    <div
+    class="fb-like"
+    data-share="true"
+    data-width="450"
+    data-show-faces="true">
+    </div>
+    </tr>
+
+    <div id="fb-root"></div>-->
+        </div>
+        <!--<script>
+var url = "https://graph.facebook.com/v2.4/me/photos?url=img&caption=test%20photo%20upload&published=false";
+
+window.fbAsyncInit = function() {
+FB.init({
+appId            : '238126636679772',
+autoLogAppEvents : true,
+xfbml            : true,
+version          : 'v2.9'
+});
+FB.AppEvents.logPageView();
+/*FB.ui({
+method: 'share_open_graph',
+action_type: 'og.likes',
+action_properties: JSON.stringify({
+object:'http://meme-nto.comeze.com',
+})
+}, function(response){
+// Debug response (optional)
+console.log(response);
+});*/
+FB.getLoginStatus(function(response) {
+if (response.status === 'connected') {
+console.log('Logged in.');
+}
+else {
+FB.login();
+}
+});
+FB.login(function(){
+// Note: The call will only work if you accept the permission request
+
+}, {scope: 'publish_actions'});
+};
+
+(function(d, s, id){
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) {return;}
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+
+</script>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+function imageUpload(){
+
+}
+</script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script>
+        jQuery(function($){
+            $('#uploadButton').on('click', function(e){
+                e.preventDefault();
+                $('#fileInput').click();
+            });
+        });
+        </script>
+        <script>
+            // <![CDATA[
+            var canvas;
+            var canvasWidth;
+            var canvasHeight;
+            var ctx;
+            var x;
+            var y;
+            var download;
+            var data;
+            var fileInput;
+            var img;
+
+
+            window.onload = function() {
+                prepareExample();
+            }
+
+            function prepareExample() {
+                img = document.getElementById('start-image');
+
+                var deviceWidth = window.innerWidth;;
+                //canvasWidth = Math.min(600, deviceWidth-20);
+               // canvasHeight = Math.min(480, deviceWidth-20);
+                canvasWidth = Math.min(846, deviceWidth-20);
+                canvasHeight = Math.min(846, deviceWidth-20);
+                canvas = document.getElementById('memegenerator');
+
+
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
+                ctx = canvas.getContext('2d');
+
+                x = canvas.width/2 - img.width/2;
+                y = canvas.height/2 - img.height/2;
+                //x = 0;
+                //y = 0;
+
+                ctx.drawImage(img, x, y);
+
+                ctx.textAlign = 'center';
+                ctx.lineWidth  = 4;
+                ctx.font = '20pt impact';
+                ctx.strokeStyle = 'black';
+                ctx.fillStyle = 'white';
+                ctx.lineJoin = 'round';
+                doTransform();
+
+
+                fileInput = document.getElementById('fileInput');
+
+                fileInput.addEventListener('change', function(e) {
+
+                    var reader = new FileReader();
+                    reader.onload = function(event){
+
+                        img.onload = function(){
+                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+                            document.getElementById('scale').value = 1;
+                            document.getElementById('rotate').value = 0;
+                            x = canvas.width/2 - img.width/2;
+                            y = canvas.height/2 - img.height/2;
+                            ctx.drawImage(img,x,y);
+                            //imgTransform();
+                        }
+                        img.src = reader.result;
+                    }
+                    reader.readAsDataURL(fileInput.files[0]);     
+
+
+
+
+                }, false);
+
+                var controls = document.getElementById('controls');
+
+
+                scale = document.getElementById('scale');
+                scale.addEventListener('change', doTransform, false);
+
+                rotate = document.getElementById('rotate');
+                rotate.addEventListener('change', doTransform, false);
+
+                download = document.getElementById('img-download');
+                download.addEventListener('click', prepareDownload, false);
+
+                ctx.textAlign = 'center';
+                ctx.lineWidth  = 4;
+                ctx.font = '20pt impact';
+                ctx.strokeStyle = 'black';
+                ctx.fillStyle = 'white';
+
+            }
+
+            function doScale(){
+                var val = document.getElementById('scale_input').value;
+                document.getElementById('scale').value = val;
+                doTransform(); 
+            }
+            function doRotate(){
+                var val = document.getElementById('rotate_input').value;
+                document.getElementById('rotate').value = val;
+                doTransform(); 
+            }
+            function doTransform() {
+                ctx.save();
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Translate to center so transformations will apply around this point
+                ctx.translate(canvas.width/2, canvas.height/2);
+
+                // Perform scale
+                var val = document.getElementById('scale').value;
+                document.getElementById('scale_input').value = val;
+                ctx.scale(val,val);
+
+                // Perform rotation
+                val = document.getElementById('rotate').value;
+                document.getElementById('rotate_input').value = val;
+                ctx.rotate(val*Math.PI/180);
+
+                // Reverse the earlier translation
+                ctx.translate(-canvas.width/2, -canvas.height/2);
+
+                // Finally, draw the image
+                ctx.drawImage(img, x, y);
+
+                ctx.restore();
+
+                text = document.getElementById('custom-text').value;
+                text = text.toUpperCase();
+                //ctx.strokeText(text, canvas.width/2 , canvas.height - canvas.height/4 );
+                //ctx.fillText(text, canvas.width/2 , canvas.height - canvas.height/4 );
+                wrapText(ctx, text, canvas.width/2, canvas.height - canvas.height/4.5, canvasWidth-canvasWidth/3, 30);
+
+                text2 = document.getElementById('custom-text2').value;
+                text2 = text2.toUpperCase();
+                wrapText(ctx, text2, canvas.width/2, canvas.height - canvas.height/5.5, canvasWidth-canvasWidth/3, 30);
+                // var length = ctx.measureText(text);
+                // x = canvas.width/2;// - length/2;
+                // y = canvas.height - canvas.height/4.5;
+                // ctx.strokeText(text, x, y);
+                // ctx.fillText(text, x, y);
+            }
+
+
+            function prepareDownload() {
+                var data = canvas.toDataURL();
+                download.href = data;
+            }
+
+            // Modified from http://www.html5canvastutorials.com/tutorials/html5-canvas-wrap-text-tutorial/
+            function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+                var words = text.split(' ');
+                var line = '';
+
+                for(var n = 0; n < words.length; n++) {
+                    var testLine = line + words[n] + ' '; 
+                    var metrics = ctx.measureText(testLine); 
+                    var testWidth = metrics.width; 
+                    if (testWidth > maxWidth && n > 0) {
+                        ctx.strokeText(line, x, y);
+                        ctx.fillText(line, x, y);
+                        line = words[n] + ' ';
+                        y += lineHeight;
+                    }
+                    else {
+                        line = testLine;
+                    }
+                }
+                ctx.strokeText(line, x, y);
+                ctx.fillText(line, x, y);
+            }
+
+        </script>
+    </body>
+</html> 
