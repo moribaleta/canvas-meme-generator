@@ -10,7 +10,7 @@ body{
 canvas{
     border-style: solid;
     border-color: white;
-    position: fixed;
+    position: absolute;
     left: 13%;
 }
 .button.upload{
@@ -75,4 +75,11 @@ canvas{
 }
 *:focus {
     outline: none;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder{
+    color:
+        text-shadow: none;
+    -webkit-text-fill-color: initial;
 }
