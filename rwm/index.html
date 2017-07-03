@@ -6,91 +6,105 @@
 <meta property="og:title"         content="meme-nto" />
 <meta property="og:description"   content="meme generator" />
 <meta property="og:image"         content="http://meme-nto.comeze.com/resources/images/Quinlingpandabearr.jpg" />-->
-		<link rel="stylesheet" type="text/css" href="css/style.css">
+        <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
+        <link rel="stylesheet" type="text/css" href="css/new-style.css">
     </head>
     <body>
-        <div class="wrapper">
-            <div class="canvas-outer">
-                <img style="display: none;" src="images/logo-frame-2x.png" id="start-image">
-                <canvas id="memegenerator"></canvas>
-                <div class="control-wrapper">
-                    <div class="enter-text-wrapper">
-                        <input id="custom-text" type="text" value="" placeholder='enter text'/><br /><br />
-                        <input id="custom-text2" type="text" value="" placeholder='enter text'/><br /><br />
-                        <button onclick="doTransform()">add text</button>
-                    </div>
-                    <div>
-                        scale: <input id="scale" max="4" min="0.1" step="0.01" type="range" value="1" />
-                        <input type="number" id='scale_input' onchange='doScale()'/>
-                    </div>
-                    <div>
-                        rotate: <input id="rotate" max="180" min="-180" step="1" type="range" value="0" />
-                        <input type="number" id='rotate_input' onchange='doRotate()'/>
-                    </div>
-                    <div>
-                        <input id="fileInput" type="file" style="display: none;" />
-                        <div class="button upload" id="uploadButton"><img src="images/icon-camera.png">Add Photo</div>
-                    </div>
-                    <div>
-                        <a id="img-download" download="mobiforge-canvas.png">Download image</a>
-                    </div>
-                </div>
+        
+        <div class="content" id="background">
+            <img id="foreground" src="images/logo-frame-2x.png">
+            <input id="input" type="text">
+            <div class="button upload" id="uploadButton">
+                <img src="images/icon-camera.png">Add Photo
             </div>
-            <!--table>
-                <tr>
-                    <td>
-                        <canvas  id="memegenerator"></canvas>
-                    </td>
-
-                </tr>
-                <tr>
-                    <td>
-                        scale: <input id="scale" max="4" min="0.1" step="0.01" type="range" value="1" />
-                        <input type="number" id='scale_input' onchange='doScale()'/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        rotate: <input id="rotate" max="180" min="-180" step="1" type="range" value="0" />
-                        <input type="number" id='rotate_input' onchange='doRotate()'/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input id="fileInput" type="file" style="display: none;" />
-                        <div class="button upload" id="uploadButton"><img src="images/icon-camera.png">Add Photo</div>
-                    </td>
-
-                </tr>
-                <tr>
-                    <td>
-                        <input id="custom-text" type="text" value="" placeholder='enter text'/>
-                        <button onclick="doTransform()">add text</button>
-                    </td>
-
-                </tr>
-                <tr>
-                    <td>
-                        <a id="img-download" download="mobiforge-canvas.png">Download image</a>
-                    </td>
-
-                </tr>
-            </table-->
-                <!-- <tr>
-    <a class="twitter-share-button"
-    onclick="shareTwitter()">
-    Tweet</a>
-    <div
-    class="fb-like"
-    data-share="true"
-    data-width="450"
-    data-show-faces="true">
-    </div>
-    </tr>
-
-    <div id="fb-root"></div>-->
+            <input id="fileInput" type="file" style="display: none;"/>
         </div>
-        <!--<script>
+
+
+
+
+        <!--<div class="wrapper">
+<div class="canvas-outer">
+<img style="display: none;" src="images/logo-frame-2x.png" id="start-image">
+<canvas id="memegenerator"></canvas>
+<div class="control-wrapper">
+<div class="enter-text-wrapper">
+<input id="custom-text" type="text" value="" placeholder='enter text'/><br /><br />
+<input id="custom-text2" type="text" value="" placeholder='enter text'/><br /><br />
+<button onclick="doTransform()">add text</button>
+</div>
+<div>
+scale: <input id="scale" max="4" min="0.1" step="0.01" type="range" value="1" />
+<input type="number" id='scale_input' onchange='doScale()'/>
+</div>
+<div>
+rotate: <input id="rotate" max="180" min="-180" step="1" type="range" value="0" />
+<input type="number" id='rotate_input' onchange='doRotate()'/>
+</div>
+<div>
+<input id="fileInput" type="file" style="display: none;" />
+<div class="button upload" id="uploadButton"><img src="images/icon-camera.png">Add Photo</div>
+</div>
+<div>
+<a id="img-download" download="mobiforge-canvas.png">Download image</a>
+</div>
+</div>
+</div>-->
+        <!--table>
+<tr>
+<td>
+<canvas  id="memegenerator"></canvas>
+</td>
+
+</tr>
+<tr>
+<td>
+scale: <input id="scale" max="4" min="0.1" step="0.01" type="range" value="1" />
+<input type="number" id='scale_input' onchange='doScale()'/>
+</td>
+</tr>
+<tr>
+<td>
+rotate: <input id="rotate" max="180" min="-180" step="1" type="range" value="0" />
+<input type="number" id='rotate_input' onchange='doRotate()'/>
+</td>
+</tr>
+<tr>
+<td>
+<input id="fileInput" type="file" style="display: none;" />
+<div class="button upload" id="uploadButton"><img src="images/icon-camera.png">Add Photo</div>
+</td>
+
+</tr>
+<tr>
+<td>
+<input id="custom-text" type="text" value="" placeholder='enter text'/>
+<button onclick="doTransform()">add text</button>
+</td>
+
+</tr>
+<tr>
+<td>
+<a id="img-download" download="mobiforge-canvas.png">Download image</a>
+</td>
+
+</tr>
+</table-->
+        <!-- <tr>
+<a class="twitter-share-button"
+onclick="shareTwitter()">
+Tweet</a>
+<div
+class="fb-like"
+data-share="true"
+data-width="450"
+data-show-faces="true">
+</div>
+</tr>
+
+<div id="fb-root"></div>-->
+        <!--/div>
+<!--<script>
 var url = "https://graph.facebook.com/v2.4/me/photos?url=img&caption=test%20photo%20upload&published=false";
 
 window.fbAsyncInit = function() {
@@ -149,14 +163,14 @@ function imageUpload(){
 </script>-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script>
-        jQuery(function($){
-            $('#uploadButton').on('click', function(e){
-                e.preventDefault();
-                $('#fileInput').click();
+            jQuery(function($){
+                $('#uploadButton').on('click', function(e){
+                    e.preventDefault();
+                    $('#fileInput').click();
+                });
             });
-        });
         </script>
-        <script>
+       <!-- <script>
             // <![CDATA[
             var canvas;
             var canvasWidth;
@@ -179,7 +193,7 @@ function imageUpload(){
 
                 var deviceWidth = window.innerWidth;;
                 //canvasWidth = Math.min(600, deviceWidth-20);
-               // canvasHeight = Math.min(480, deviceWidth-20);
+                // canvasHeight = Math.min(480, deviceWidth-20);
                 canvasWidth = Math.min(846, deviceWidth-20);
                 canvasHeight = Math.min(846, deviceWidth-20);
                 canvas = document.getElementById('memegenerator');
@@ -330,6 +344,6 @@ function imageUpload(){
                 ctx.fillText(line, x, y);
             }
 
-        </script>
+        </script>-->
     </body>
 </html> 
